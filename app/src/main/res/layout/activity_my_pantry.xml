@@ -5,70 +5,230 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:background="#FAFAFA">
+    android:background="#EEF5E8"
+    android:padding="20dp">
 
-    <TextView
+    <!-- Header -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Pantry"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="#2E7D32"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="8dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp">
 
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="‹"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:background="#5B7F3A"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="My Pantry"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#254D20"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="🌿"
+            android:textSize="22sp"
+            android:background="#FFFFFF" />
+
+    </LinearLayout>
+
+    <!-- Subtitle -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Manage the ingredients in your pantry"
         android:textSize="14sp"
-        android:textColor="#666666"
+        android:textColor="#66705F"
         android:gravity="center"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="25dp" />
 
-    <EditText
-        android:id="@+id/etIngredient"
+    <!-- Ingredient input -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/etIngredient"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="🌿  Enter ingredient..."
+            android:textSize="16sp"
+            android:textColor="#263821"
+            android:textColorHint="#8B9185"
+            android:background="#FFFFFF"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:singleLine="true"
+            android:inputType="textCapWords" />
+
+        <Button
+            android:id="@+id/btnAddIngredient"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:text="+  Add"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:backgroundTint="#8B5A2B" />
+
+    </LinearLayout>
+
+    <!-- Category selector -->
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp"
+        android:background="#FFF8E7"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" />
+
+
+    <!-- Category filter buttons -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter ingredient"
-        android:inputType="text"
-        android:padding="12dp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/btnAddIngredient"
+        <Button
+            android:id="@+id/btnAll"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:text="All"
+            android:textAllCaps="false"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginEnd="3dp"
+            android:backgroundTint="#3F7336"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnFruit"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:text="Fruit"
+            android:textAllCaps="false"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:backgroundTint="#DDE9D7"
+            android:textColor="#294E25" />
+
+        <Button
+            android:id="@+id/btnVegetable"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1.25"
+            android:text="Veg"
+            android:textAllCaps="false"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:backgroundTint="#DDE9D7"
+            android:textColor="#294E25" />
+
+        <Button
+            android:id="@+id/btnDairy"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:text="Dairy"
+            android:textAllCaps="false"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:backgroundTint="#DDE9D7"
+            android:textColor="#294E25" />
+
+        <Button
+            android:id="@+id/btnOther"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:text="Other"
+            android:textAllCaps="false"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginStart="3dp"
+            android:backgroundTint="#DDE9D7"
+            android:textColor="#294E25" />
+
+    </LinearLayout>
+
+    <!-- Pantry title -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Ingredient"
-        android:textAllCaps="false"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#6F4CAF" />
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pantry Items"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#333333"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pantry Items"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:textColor="#263821" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort  ☷"
+            android:textSize="14sp"
+            android:textColor="#5B6B55" />
+
+    </LinearLayout>
+
+    <!-- Existing working pantry list -->
     <ListView
         android:id="@+id/listPantry"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back to Home"
-        android:textAllCaps="false"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:backgroundTint="#6F4CAF" />
+        android:layout_weight="1"
+        android:divider="#D8E1D3"
+        android:dividerHeight="1dp"
+        android:background="#FFFFFF"
+        android:padding="8dp" />
 
 </LinearLayout>
