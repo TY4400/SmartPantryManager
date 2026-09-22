@@ -25,6 +25,8 @@ public class MyPantryActivity extends AppCompatActivity {
     private TextView btnBack;
     private ListView listPantry;
     private Spinner spinnerCategory;
+    private EditText etQuantity;
+    private Spinner spinnerUnit;
 
     private Button btnAll;
     private Button btnFruit;
@@ -40,11 +42,17 @@ public class MyPantryActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> adapter;
     private SharedPreferences sharedPreferences;
+    private PantryItemDao pantryItemDao;
+    private PantryItem itemBeingEdited = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_pantry);
+
+        // Connect to Room database
+        AppDatabase database = AppDatabase.getDatabase(this);
+        pantryItemDao = database.pantryItemDao();
 
         // Connect Java to XML
         etIngredient = findViewById(R.id.etIngredient);
@@ -52,6 +60,8 @@ public class MyPantryActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         listPantry = findViewById(R.id.listPantry);
         spinnerCategory = findViewById(R.id.spinnerCategory);
+        etQuantity = findViewById(R.id.etQuantity);
+        spinnerUnit = findViewById(R.id.spinnerUnit);
 
         btnAll = findViewById(R.id.btnAll);
         btnFruit = findViewById(R.id.btnFruit);
@@ -79,20 +89,77 @@ public class MyPantryActivity extends AppCompatActivity {
         );
 
         spinnerCategory.setAdapter(categoryAdapter);
+        // Unit dropdown used when adding an ingredient
+        String[] units = {
+                "Select Unit",
+                "Item",
+                "g",
+                "kg",
+                "ml",
+                "L"
+        };
 
-        // Load saved pantry items
+        ArrayAdapter<String> unitAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                units
+        );
+
+        unitAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item
+        );
+
+        spinnerUnit.setAdapter(unitAdapter);
+
+        // Migrate old SharedPreferences pantry items to Room
         sharedPreferences =
                 getSharedPreferences("PantryPrefs", MODE_PRIVATE);
 
-        HashSet<String> savedItems =
-                new HashSet<>(
-                        sharedPreferences.getStringSet(
-                                "pantryItems",
-                                new HashSet<>()
-                        )
-                );
+        if (!sharedPreferences.getBoolean("roomMigrationComplete", false)) {
 
-        pantryItems = new ArrayList<>(savedItems);
+            HashSet<String> savedItems =
+                    new HashSet<>(
+                            sharedPreferences.getStringSet(
+                                    "pantryItems",
+                                    new HashSet<>()
+                            )
+                    );
+
+            for (String item : savedItems) {
+
+                String ingredient;
+                String category;
+
+                if (item.contains("|")) {
+                    String[] parts = item.split("\\|");
+                    ingredient = parts[0];
+                    category = parts.length >= 2 ? parts[1] : "Other";
+                } else {
+                    ingredient = item;
+                    category = "Other";
+                }
+
+                pantryItemDao.insert(
+                        new PantryItem(ingredient, category, 1.0, "item")
+                );
+            }
+
+            sharedPreferences.edit()
+                    .putBoolean("roomMigrationComplete", true)
+                    .apply();
+        }
+
+// Load pantry items from Room
+        pantryItems = new ArrayList<>();
+
+        for (PantryItem item : pantryItemDao.getAllItems()) {
+            pantryItems.add(
+                    item.getName() + "|" + item.getCategory()
+                            + "|" + item.getQuantity()
+                            + "|" + item.getUnit()
+            );
+        }
+
         displayedItems = new ArrayList<>(pantryItems);
 
         // Custom adapter using item_pantry.xml
@@ -128,6 +195,9 @@ public class MyPantryActivity extends AppCompatActivity {
                 TextView btnDeleteItem =
                         convertView.findViewById(R.id.btnDeleteItem);
 
+                TextView btnEditItem =
+                        convertView.findViewById(R.id.btnEditItem);
+
                 String item = displayedItems.get(position);
 
                 if (item.contains("|")) {
@@ -137,8 +207,41 @@ public class MyPantryActivity extends AppCompatActivity {
                     String ingredient = parts[0];
                     String category = parts[1];
 
+                    String quantity = "";
+                    String unit = "";
+
+                    if (parts.length >= 4) {
+                        quantity = parts[2];
+                        unit = parts[3];
+                    }
+
                     tvIngredientName.setText(ingredient);
-                    tvCategory.setText(category);
+
+                    if (!quantity.isEmpty() && !unit.isEmpty()) {
+
+                        double quantityValue = Double.parseDouble(quantity);
+
+                        String displayQuantity;
+
+                        if (quantityValue == Math.floor(quantityValue)) {
+                            displayQuantity = String.valueOf((int) quantityValue);
+                        } else {
+                            displayQuantity = String.valueOf(quantityValue);
+                        }
+
+                        String displayUnit = unit;
+
+                        if (unit.equals("Item") && quantityValue != 1) {
+                            displayUnit = "Items";
+                        }
+
+                        tvCategory.setText(
+                                category + "  •  " + displayQuantity + " " + displayUnit
+                        );
+
+                    } else {
+                        tvCategory.setText(category);
+                    }
 
                     // Set icon depending on category
                     switch (category) {
@@ -173,27 +276,109 @@ public class MyPantryActivity extends AppCompatActivity {
                     tvCategoryIcon.setText("🍂");
                 }
 
+                // EDIT ITEM
+                btnEditItem.setOnClickListener(v -> {
+
+                    String itemToEdit = displayedItems.get(position);
+                    String[] itemParts = itemToEdit.split("\\|");
+
+                    for (PantryItem roomItem : pantryItemDao.getAllItems()) {
+
+                        if (roomItem.getName().equals(itemParts[0])) {
+
+                            itemBeingEdited = roomItem;
+                            btnAddIngredient.setText("Update");
+                            break;
+                        }
+                    }
+                    String[] editParts = itemToEdit.split("\\|");
+
+                    if (editParts.length >= 2) {
+
+                        // Put the existing ingredient name back into the input
+                        etIngredient.setText(editParts[0]);
+
+                        // Select the existing category
+                        String editCategory = editParts[1];
+
+                        for (int i = 0; i < spinnerCategory.getCount(); i++) {
+                            if (spinnerCategory.getItemAtPosition(i).toString()
+                                    .equals(editCategory)) {
+
+                                spinnerCategory.setSelection(i);
+                                break;
+                            }
+                        }
+
+                        // Put existing quantity back into the input
+                        if (editParts.length >= 3) {
+                            etQuantity.setText(editParts[2]);
+                        }
+
+                        // Select the existing unit
+                        if (editParts.length >= 4) {
+
+                            String editUnit = editParts[3];
+
+                            for (int i = 0; i < spinnerUnit.getCount(); i++) {
+                                if (spinnerUnit.getItemAtPosition(i).toString()
+                                        .equals(editUnit)) {
+
+                                    spinnerUnit.setSelection(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                });
+
                 // DELETE ITEM
                 btnDeleteItem.setOnClickListener(v -> {
 
                     String itemToDelete = displayedItems.get(position);
 
-                    // Remove from the main pantry list
-                    pantryItems.remove(itemToDelete);
+                    // Get ingredient name and category
+                    String ingredient;
+                    String category;
 
-                    // Remove from what is currently displayed
-                    displayedItems.remove(itemToDelete);
+                    if (itemToDelete.contains("|")) {
 
-                    // Update saved pantry
-                    sharedPreferences.edit()
-                            .putStringSet(
-                                    "pantryItems",
-                                    new HashSet<>(pantryItems)
-                            )
-                            .apply();
+                        String[] parts = itemToDelete.split("\\|");
 
-                    // Refresh screen
-                    notifyDataSetChanged();
+                        ingredient = parts[0];
+                        category = parts.length >= 2 ? parts[1] : "Other";
+
+                    } else {
+
+                        ingredient = itemToDelete;
+                        category = "Other";
+                    }
+
+                    // Find the matching item in Room
+                    for (PantryItem roomItem : pantryItemDao.getAllItems()) {
+
+                        if (roomItem.getName().equals(ingredient)
+                                && roomItem.getCategory().equals(category)) {
+
+                            pantryItemDao.delete(roomItem);
+                            break;
+                        }
+                    }
+
+                    // Reload pantry items from Room
+                    pantryItems.clear();
+
+                    for (PantryItem roomItem : pantryItemDao.getAllItems()) {
+
+                        pantryItems.add(
+                                roomItem.getName() + "|" + roomItem.getCategory()
+                                        + "|" + roomItem.getQuantity()
+                                        + "|" + roomItem.getUnit()
+                        );
+                    }
+
+                    // Refresh what is displayed
+                    showAllItems();
 
                     Toast.makeText(
                             MyPantryActivity.this,
@@ -218,6 +403,9 @@ public class MyPantryActivity extends AppCompatActivity {
             String category =
                     spinnerCategory.getSelectedItem().toString();
 
+            String quantityText = etQuantity.getText().toString().trim();
+            String unit = spinnerUnit.getSelectedItem().toString();
+
             if (ingredient.isEmpty()) {
 
                 Toast.makeText(
@@ -234,26 +422,73 @@ public class MyPantryActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT
                 ).show();
 
-            } else {
+            } else if (quantityText.isEmpty()) {
 
-                String pantryItem =
-                        ingredient + "|" + category;
+                Toast.makeText(
+                        MyPantryActivity.this,
+                        "Please enter a quantity",
+                        Toast.LENGTH_SHORT
+                ).show();
 
-                pantryItems.add(pantryItem);
+            } else if (unit.equals("Select Unit")) {
 
-                // Save permanently
-                sharedPreferences.edit()
-                        .putStringSet(
-                                "pantryItems",
-                                new HashSet<>(pantryItems)
-                        )
-                        .apply();
+                Toast.makeText(
+                        MyPantryActivity.this,
+                        "Please select a unit",
+                        Toast.LENGTH_SHORT
+                ).show();
 
-                // Show all items after adding
+            }
+            else {
+
+                // Convert quantity text to number
+                double quantity = Double.parseDouble(quantityText);
+
+                if (itemBeingEdited == null) {
+
+                    // ADD a new pantry item
+                    PantryItem newItem = new PantryItem(
+                            ingredient,
+                            category,
+                            quantity,
+                            unit
+                    );
+
+                    pantryItemDao.insert(newItem);
+
+                } else {
+
+                    // UPDATE the existing pantry item
+                    itemBeingEdited.setName(ingredient);
+                    itemBeingEdited.setCategory(category);
+                    itemBeingEdited.setQuantity(quantity);
+                    itemBeingEdited.setUnit(unit);
+
+                    pantryItemDao.update(itemBeingEdited);
+
+                    // Editing is finished
+                    itemBeingEdited = null;
+                    btnAddIngredient.setText("+ Add");
+                }
+
+// Reload pantry items from Room
+                pantryItems.clear();
+
+                for (PantryItem item : pantryItemDao.getAllItems()) {
+                    pantryItems.add(
+                            item.getName() + "|" + item.getCategory()
+                                    + "|" + item.getQuantity()
+                                    + "|" + item.getUnit()
+                    );
+                }
+
+// Refresh the screen
                 showAllItems();
 
                 etIngredient.setText("");
                 spinnerCategory.setSelection(0);
+                etQuantity.setText("");
+                spinnerUnit.setSelection(0);
 
                 Toast.makeText(
                         MyPantryActivity.this,
