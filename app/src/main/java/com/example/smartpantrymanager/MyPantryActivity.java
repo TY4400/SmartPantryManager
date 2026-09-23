@@ -442,7 +442,29 @@ public class MyPantryActivity extends AppCompatActivity {
             else {
 
                 // Convert quantity text to number
-                double quantity = Double.parseDouble(quantityText);
+                double quantity;
+
+                try {
+                    quantity = Double.parseDouble(quantityText);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(
+                            MyPantryActivity.this,
+                            "Please enter a valid quantity",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    return;
+                }
+
+                if (quantity <= 0) {
+                    Toast.makeText(
+                            MyPantryActivity.this,
+                            "Quantity must be greater than 0",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    return;
+                }
+
+                boolean wasEditing = itemBeingEdited != null;
 
                 if (itemBeingEdited == null) {
 
@@ -492,7 +514,9 @@ public class MyPantryActivity extends AppCompatActivity {
 
                 Toast.makeText(
                         MyPantryActivity.this,
-                        ingredient + " added to " + category,
+                        wasEditing
+                                ? ingredient + " updated successfully"
+                                : ingredient + " added to " + category,
                         Toast.LENGTH_SHORT
                 ).show();
             }
