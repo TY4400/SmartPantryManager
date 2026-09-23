@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEF5E8"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp">
+
+            <TextView
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="‹"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"
+                android:background="#5B7F3A"
+                android:contentDescription="Back" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Recipe Details"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="#254D20"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="🍲"
+                android:textSize="22sp"
+                android:background="#FFFFFF" />
+
+        </LinearLayout>
+
+        <!-- Recipe information -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="22dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:id="@+id/tvRecipeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Avocado Toast"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#254D20" />
+
+            <TextView
+                android:id="@+id/tvRecipeCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Breakfast"
+                android:textSize="14sp"
+                android:textColor="#8B6A4C"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/tvCookingTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="◷ 10 mins"
+                android:textSize="14sp"
+                android:textColor="#66705F"
+                android:layout_marginTop="6dp" />
+
+        </LinearLayout>
+
+        <!-- Ingredients -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFF8E7"
+            android:padding="22dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🥕  Ingredients"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#294E25" />
+
+            <TextView
+                android:id="@+id/tvIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bread, Avocado, Salt, Pepper"
+                android:textSize="16sp"
+                android:textColor="#4E5A49"
+                android:lineSpacingExtra="5dp"
+                android:layout_marginTop="14dp" />
+
+        </LinearLayout>
+
+        <!-- Instructions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="22dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🍳  Instructions"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#294E25" />
+
+            <TextView
+                android:id="@+id/tvInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Toast the bread, mash the avocado, spread it on the toast and season."
+                android:textSize="16sp"
+                android:textColor="#4E5A49"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginTop="14dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnMyPantry;
+    private Button btnRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +20,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnMyPantry = findViewById(R.id.btnMyPantry);
+        btnRecipes = findViewById(R.id.btnRecipes);
 
         btnMyPantry.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MyPantryActivity.class);
+            startActivity(intent);
+        });
+
+        btnRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
             startActivity(intent);
         });
 

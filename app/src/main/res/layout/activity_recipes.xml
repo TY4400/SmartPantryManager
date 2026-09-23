@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EEF5E8"
+    android:padding="20dp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="‹"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:background="#5B7F3A"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Recipes"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#254D20"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="🍲"
+            android:textSize="22sp"
+            android:background="#FFFFFF" />
+
+    </LinearLayout>
+
+    <!-- Subtitle -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find something delicious to cook"
+        android:textSize="14sp"
+        android:textColor="#66705F"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Search -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <EditText
+            android:id="@+id/etSearchRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="🔍  Search recipes..."
+            android:textSize="15sp"
+            android:textColor="#263821"
+            android:textColorHint="#8B9185"
+            android:background="#FFFFFF"
+            android:paddingStart="18dp"
+            android:paddingEnd="55dp"
+            android:singleLine="true"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/btnClearSearch"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:text="×"
+            android:textSize="26sp"
+            android:textColor="#5D6B58"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <!-- Category buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnAllRecipes"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:text="All"
+            android:textAllCaps="false"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginEnd="3dp"
+            android:backgroundTint="#3F7336"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnBreakfast"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1.3"
+            android:text="Breakfast"
+            android:textAllCaps="false"
+            android:textSize="10sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:backgroundTint="#DDE9D7"
+            android:textColor="#294E25" />
+
+        <Button
+            android:id="@+id/btnLunch"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:text="Lunch"
+            android:textAllCaps="false"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:backgroundTint="#DDE9D7"
+            android:textColor="#294E25" />
+
+        <Button
+            android:id="@+id/btnDinner"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:text="Dinner"
+            android:textAllCaps="false"
+            android:textSize="11sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="0dp"
+            android:layout_marginStart="3dp"
+            android:backgroundTint="#DDE9D7"
+            android:textColor="#294E25" />
+
+    </LinearLayout>
+
+    <!-- Recipe section title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All Recipes"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:textColor="#263821" />
+
+        <TextView
+            android:id="@+id/tvRecipeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 recipes"
+            android:textSize="13sp"
+            android:textColor="#66705F" />
+
+    </LinearLayout>
+
+    <!-- Recipe list will appear here -->
+    <ListView
+        android:id="@+id/listRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:background="#EEF5E8" />
+
+</LinearLayout>

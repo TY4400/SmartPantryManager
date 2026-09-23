@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="14dp"
+    android:layout_marginBottom="10dp"
+    android:background="#FFFFFF">
+
+    <!-- Recipe icon -->
+    <TextView
+        android:id="@+id/tvRecipeIcon"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:text="🍲"
+        android:textSize="28sp"
+        android:background="#EEF5E8" />
+
+    <!-- Recipe information -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="14dp">
+
+        <TextView
+            android:id="@+id/tvRecipeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegetable Pasta"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="#294E25" />
+
+        <TextView
+            android:id="@+id/tvRecipeCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dinner"
+            android:textSize="13sp"
+            android:textColor="#8B6A4C"
+            android:layout_marginTop="3dp" />
+
+        <TextView
+            android:id="@+id/tvCookingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ 25 mins"
+            android:textSize="12sp"
+            android:textColor="#66705F"
+            android:layout_marginTop="3dp" />
+
+    </LinearLayout>
+
+    <!-- Open recipe -->
+    <TextView
+        android:id="@+id/tvOpenRecipe"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="›"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#5B7F3A"
+        android:contentDescription="Open recipe" />
+
+</LinearLayout>
