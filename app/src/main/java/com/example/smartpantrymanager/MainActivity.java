@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnMyPantry;
     private Button btnRecipes;
+    private Button btnSuggestedRecipes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnMyPantry = findViewById(R.id.btnMyPantry);
         btnRecipes = findViewById(R.id.btnRecipes);
+        btnSuggestedRecipes = findViewById(R.id.btnSuggestedRecipes);
 
         btnMyPantry.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MyPantryActivity.class);
@@ -29,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnRecipes.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RecipesActivity.class);
+            startActivity(intent);
+        });
+
+        btnSuggestedRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SuggestedRecipesActivity.class);
             startActivity(intent);
         });
 

@@ -64,8 +64,10 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
                 recipeName.contains("avocado toast")) {
             tvRecipeIcon.setText("🍞");
 
-        } else if (recipeName.contains("scrambled eggs") ||
-                recipeName.contains("shakshuka")) {
+        } else if (recipeName.contains("scrambled eggs")) {
+            tvRecipeIcon.setText("🥚");
+
+        } else if (recipeName.contains("shakshuka")) {
             tvRecipeIcon.setText("🍳");
 
         } else if (recipeName.contains("burrito") ||

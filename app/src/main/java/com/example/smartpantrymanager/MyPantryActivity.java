@@ -243,26 +243,112 @@ public class MyPantryActivity extends AppCompatActivity {
                         tvCategory.setText(category);
                     }
 
-                    // Set icon depending on category
+                    // Set icon depending on ingredient name
+                    String ingredientName = tvIngredientName.getText().toString().toLowerCase().trim();
+
+                    if (ingredientName.contains("egg")) {
+                        tvItemIcon.setText("🥚");
+
+                    } else if (ingredientName.contains("milk")) {
+                        tvItemIcon.setText("🥛");
+
+                    } else if (ingredientName.contains("butter")) {
+                        tvItemIcon.setText("🧈");
+
+                    } else if (ingredientName.contains("salt")) {
+                        tvItemIcon.setText("🧂");
+
+                    } else if (ingredientName.contains("pepper")) {
+                        tvItemIcon.setText("🌶️");
+
+                    } else if (ingredientName.contains("chicken")) {
+                        tvItemIcon.setText("🍗");
+
+                    } else if (ingredientName.contains("beef")) {
+                        tvItemIcon.setText("🥩");
+
+                    } else if (ingredientName.contains("rice")) {
+                        tvItemIcon.setText("🍚");
+
+                    } else if (ingredientName.contains("bread")) {
+                        tvItemIcon.setText("🍞");
+
+                    } else if (ingredientName.contains("tomato")) {
+                        tvItemIcon.setText("🍅");
+
+                    } else if (ingredientName.contains("carrot")) {
+                        tvItemIcon.setText("🥕");
+
+                    } else if (ingredientName.contains("cheese")) {
+                        tvItemIcon.setText("🧀");
+
+                    } else if (ingredientName.contains("avocado")) {
+                        tvItemIcon.setText("🥑");
+
+                    } else if (ingredientName.contains("garlic")) {
+                        tvItemIcon.setText("🧄");
+
+                    } else if (ingredientName.contains("onion")) {
+                        tvItemIcon.setText("🧅");
+
+                    } else if (ingredientName.contains("potato")) {
+                        tvItemIcon.setText("🥔");
+
+                    } else if (ingredientName.contains("lemon")) {
+                        tvItemIcon.setText("🍋");
+
+                    } else if (ingredientName.contains("banana")) {
+                        tvItemIcon.setText("🍌");
+
+                    } else if (ingredientName.contains("apple")) {
+                        tvItemIcon.setText("🍎");
+
+                    } else if (ingredientName.contains("shrimp")) {
+                        tvItemIcon.setText("🍤");
+
+                    } else if (ingredientName.contains("pasta") ||
+                            ingredientName.contains("spaghetti")) {
+                        tvItemIcon.setText("🍝");
+
+                    } else {
+
+                        // Fallback icon based on category
+                        switch (category) {
+
+                            case "Fruit":
+                                tvItemIcon.setText("🍎");
+                                break;
+
+                            case "Vegetable":
+                                tvItemIcon.setText("🥕");
+                                break;
+
+                            case "Dairy":
+                                tvItemIcon.setText("🥛");
+                                break;
+
+                            default:
+                                tvItemIcon.setText("🥫");
+                                break;
+                        }
+                    }
+
+                    // Set small category icon
                     switch (category) {
 
                         case "Fruit":
-                            tvItemIcon.setText("🍎");
                             tvCategoryIcon.setText("🍃");
                             break;
 
                         case "Vegetable":
-                            tvItemIcon.setText("🥕");
                             tvCategoryIcon.setText("🌿");
                             break;
 
                         case "Dairy":
-                            tvItemIcon.setText("🥛");
                             tvCategoryIcon.setText("🌱");
                             break;
 
                         default:
-                            tvItemIcon.setText("🥫");
                             tvCategoryIcon.setText("🍂");
                             break;
                     }
