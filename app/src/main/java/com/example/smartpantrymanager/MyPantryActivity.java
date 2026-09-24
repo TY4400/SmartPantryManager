@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +34,10 @@ public class MyPantryActivity extends AppCompatActivity {
     private Button btnVegetable;
     private Button btnDairy;
     private Button btnOther;
+    private Button navHome;
+    private Button navPantry;
+    private Button navRecipes;
+    private Button navSettings;
 
     // Stores ALL pantry items
     private ArrayList<String> pantryItems;
@@ -68,6 +73,10 @@ public class MyPantryActivity extends AppCompatActivity {
         btnVegetable = findViewById(R.id.btnVegetable);
         btnDairy = findViewById(R.id.btnDairy);
         btnOther = findViewById(R.id.btnOther);
+        navHome = findViewById(R.id.navHome);
+        navPantry = findViewById(R.id.navPantry);
+        navRecipes = findViewById(R.id.navRecipes);
+        navSettings = findViewById(R.id.navSettings);
 
         // Category dropdown used when ADDING an ingredient
         String[] categories = {
@@ -628,6 +637,29 @@ public class MyPantryActivity extends AppCompatActivity {
         btnOther.setOnClickListener(v ->
                 filterItems("Other")
         );
+
+        // BOTTOM NAVIGATION
+        navHome.setOnClickListener(v -> {
+            Intent intent = new Intent(MyPantryActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        navPantry.setOnClickListener(v -> {
+            // Already on Pantry, so no action is needed
+        });
+
+        navRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(MyPantryActivity.this, RecipesActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        navSettings.setOnClickListener(v -> {
+            Intent intent = new Intent(MyPantryActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         // BACK BUTTON
         btnBack.setOnClickListener(v -> finish());

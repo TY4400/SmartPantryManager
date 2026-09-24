@@ -69,7 +69,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         );
     }
 
-    private boolean canMakeRecipe(Recipe recipe, java.util.List<PantryItem> pantryItems) {
+    public static boolean canMakeRecipe(Recipe recipe, java.util.List<PantryItem> pantryItems) {
 
         String requirements = recipe.getIngredientRequirements();
 
@@ -127,7 +127,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean hasEnoughQuantity(
+    private static boolean hasEnoughQuantity(
             PantryItem pantryItem,
             double requiredQuantity,
             String requiredUnit) {
@@ -222,7 +222,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         }
     }
 
-    private String normalizeIngredientName(String name) {
+    private static String normalizeIngredientName(String name) {
 
         if (name == null) {
             return "";

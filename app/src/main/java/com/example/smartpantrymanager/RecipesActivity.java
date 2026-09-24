@@ -2,6 +2,7 @@ package com.example.smartpantrymanager;
 
 import android.os.Bundle;
 
+import android.content.Intent;
 import android.widget.EditText;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +25,10 @@ public class RecipesActivity extends AppCompatActivity {
     private Button btnBreakfast;
     private Button btnLunch;
     private Button btnDinner;
+    private Button navHome;
+    private Button navPantry;
+    private Button navRecipes;
+    private Button navSettings;
     private ArrayList<Recipe> displayedRecipes;
     private EditText etSearchRecipes;
     private TextView btnClearSearch;
@@ -46,6 +51,12 @@ public class RecipesActivity extends AppCompatActivity {
         btnBreakfast = findViewById(R.id.btnBreakfast);
         btnLunch = findViewById(R.id.btnLunch);
         btnDinner = findViewById(R.id.btnDinner);
+
+        navHome = findViewById(R.id.navHome);
+        navPantry = findViewById(R.id.navPantry);
+        navRecipes = findViewById(R.id.navRecipes);
+        navSettings = findViewById(R.id.navSettings);
+
         etSearchRecipes = findViewById(R.id.etSearchRecipes);
         btnClearSearch = findViewById(R.id.btnClearSearch);
 
@@ -325,6 +336,29 @@ public class RecipesActivity extends AppCompatActivity {
         });
 
         recipeAdapter.notifyDataSetChanged();
+
+        // BOTTOM NAVIGATION
+        navHome.setOnClickListener(v -> {
+            Intent intent = new Intent(RecipesActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        navPantry.setOnClickListener(v -> {
+            Intent intent = new Intent(RecipesActivity.this, MyPantryActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        navRecipes.setOnClickListener(v -> {
+            // Already on Recipes, so no action is needed
+        });
+
+        navSettings.setOnClickListener(v -> {
+            Intent intent = new Intent(RecipesActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         TextView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> finish());

@@ -65,56 +65,132 @@
 
     </LinearLayout>
 
-    <!-- My Pantry -->
-    <Button
-        android:id="@+id/btnMyPantry"
+    <!-- Dashboard Stats -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:text="🥕   MY PANTRY"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#4F7A3A"
-        android:elevation="6dp"
-        android:layout_marginBottom="14dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="18dp">
 
-    <!-- Recipes -->
-    <Button
-        android:id="@+id/btnRecipes"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:text="🍲   RECIPES"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#9A642E"
-        android:elevation="6dp"
-        android:layout_marginBottom="14dp" />
+        <!-- Pantry Items Card -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginEnd="7dp"
+            android:elevation="3dp">
 
-    <!-- Suggested Recipes -->
-    <Button
-        android:id="@+id/btnSuggestedRecipes"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:text="🍎   SUGGESTED RECIPES"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#668A4C"
-        android:elevation="6dp"
-        android:layout_marginBottom="14dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🌿"
+                android:textSize="25sp" />
 
-    <!-- Settings -->
-    <Button
-        android:id="@+id/btnSettings"
+            <TextView
+                android:id="@+id/tvPantryCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#285A2A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pantry Items"
+                android:textSize="13sp"
+                android:textColor="#6B725F" />
+
+        </LinearLayout>
+
+        <!-- Ready to Cook Card -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginStart="7dp"
+            android:elevation="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🍲"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tvReadyCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#285A2A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ready to Cook"
+                android:textSize="13sp"
+                android:textColor="#6B725F" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Suggested Recipe Summary -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:text="⚙   SETTINGS"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#4D3A2B"
-        android:backgroundTint="#DCC7A1"
-        android:elevation="6dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="14dp"
+        android:background="#FFF7E6"
+        android:padding="16dp"
+        android:elevation="2dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🍽  WHAT CAN I MAKE?"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#285A2A"
+            android:layout_marginBottom="7dp" />
+
+        <TextView
+            android:id="@+id/tvReadyMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Checking your pantry for recipes..."
+            android:textSize="13sp"
+            android:textColor="#6B725F"
+            android:lineSpacingExtra="2dp"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnViewSuggested"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="View Suggested Recipes  →"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:backgroundTint="#5B873E" />
+
+    </LinearLayout>
 
     <!-- Push footer down -->
     <Space
@@ -131,5 +207,60 @@
         android:textColor="#668A4C"
         android:gravity="center"
         android:layout_marginBottom="15dp" />
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:elevation="8dp">
+
+        <Button
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🏠&#10;Home"
+            android:textSize="11sp"
+            android:textColor="#285A2A"
+            android:backgroundTint="#EEF6E8"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/navPantry"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🌿&#10;Pantry"
+            android:textSize="11sp"
+            android:textColor="#285A2A"
+            android:backgroundTint="#FFFFFF"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/navRecipes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🍲&#10;Recipes"
+            android:textSize="11sp"
+            android:textColor="#285A2A"
+            android:backgroundTint="#FFFFFF"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="⚙&#10;Settings"
+            android:textSize="11sp"
+            android:textColor="#285A2A"
+            android:backgroundTint="#FFFFFF"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
 
 </LinearLayout>

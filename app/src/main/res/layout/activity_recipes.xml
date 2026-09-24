@@ -199,4 +199,71 @@
         android:dividerHeight="10dp"
         android:background="#EEF5E8" />
 
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="⌂ Home"
+            android:textSize="10sp"
+            android:textAllCaps="false"
+            android:textColor="#285A2A"
+            android:backgroundTint="#FFFFFF"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="2dp" />
+
+        <Button
+            android:id="@+id/navPantry"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🌿 Pantry"
+            android:textSize="10sp"
+            android:textAllCaps="false"
+            android:textColor="#285A2A"
+            android:backgroundTint="#FFFFFF"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="2dp" />
+
+        <Button
+            android:id="@+id/navRecipes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="🍲 Recipes"
+            android:textSize="10sp"
+            android:textAllCaps="false"
+            android:textColor="#285A2A"
+            android:backgroundTint="#E7F1DF"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="2dp" />
+
+        <Button
+            android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="⚙ Settings"
+            android:textSize="10sp"
+            android:textAllCaps="false"
+            android:textColor="#285A2A"
+            android:backgroundTint="#FFFFFF"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="2dp" />
+
+    </LinearLayout>
+
 </LinearLayout>
