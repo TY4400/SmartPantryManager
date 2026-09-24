@@ -13,18 +13,21 @@ public class Recipe {
     private String category;
     private String cookingTime;
     private String ingredients;
+    private String ingredientRequirements;
     private String instructions;
 
     public Recipe(String name,
                   String category,
                   String cookingTime,
                   String ingredients,
+                  String ingredientRequirements,
                   String instructions) {
 
         this.name = name;
         this.category = category;
         this.cookingTime = cookingTime;
         this.ingredients = ingredients;
+        this.ingredientRequirements = ingredientRequirements;
         this.instructions = instructions;
     }
 
@@ -50,6 +53,10 @@ public class Recipe {
 
     public String getIngredients() {
         return ingredients;
+    }
+
+    public String getIngredientRequirements() {
+        return ingredientRequirements;
     }
 
     public String getInstructions() {

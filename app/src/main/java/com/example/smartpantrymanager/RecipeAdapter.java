@@ -54,24 +54,57 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
         tvRecipeCategory.setText(recipe.getCategory());
         tvCookingTime.setText("⏱ " + recipe.getCookingTime());
 
-        // Change icon depending on recipe category
-        switch (recipe.getCategory()) {
+        // Choose icon based on the actual recipe
+        String recipeName = recipe.getName().toLowerCase();
 
-            case "Breakfast":
-                tvRecipeIcon.setText("🍳");
-                break;
+        if (recipeName.contains("pancake")) {
+            tvRecipeIcon.setText("🥞");
 
-            case "Lunch":
-                tvRecipeIcon.setText("🥗");
-                break;
+        } else if (recipeName.contains("french toast") ||
+                recipeName.contains("avocado toast")) {
+            tvRecipeIcon.setText("🍞");
 
-            case "Dinner":
-                tvRecipeIcon.setText("🍲");
-                break;
+        } else if (recipeName.contains("scrambled eggs") ||
+                recipeName.contains("shakshuka")) {
+            tvRecipeIcon.setText("🍳");
 
-            default:
-                tvRecipeIcon.setText("🍽️");
-                break;
+        } else if (recipeName.contains("burrito") ||
+                recipeName.contains("quesadilla")) {
+            tvRecipeIcon.setText("🌯");
+
+        } else if (recipeName.contains("taco")) {
+            tvRecipeIcon.setText("🌮");
+
+        } else if (recipeName.contains("alfredo") ||
+                recipeName.contains("bolognese") ||
+                recipeName.contains("pasta") ||
+                recipeName.contains("mac and cheese")) {
+            tvRecipeIcon.setText("🍝");
+
+        } else if (recipeName.contains("curry")) {
+            tvRecipeIcon.setText("🍛");
+
+        } else if (recipeName.contains("salad")) {
+            tvRecipeIcon.setText("🥗");
+
+        } else if (recipeName.contains("potato")) {
+            tvRecipeIcon.setText("🥔");
+
+        } else if (recipeName.contains("teriyaki") ||
+                recipeName.contains("rice bowl")) {
+            tvRecipeIcon.setText("🍚");
+
+        } else if (recipeName.contains("tuna")) {
+            tvRecipeIcon.setText("🥪");
+
+        } else if (recipeName.contains("chicken")) {
+            tvRecipeIcon.setText("🍗");
+
+        } else if (recipeName.contains("beef")) {
+            tvRecipeIcon.setText("🥩");
+
+        } else {
+            tvRecipeIcon.setText("🍽️");
         }
 
         convertView.setOnClickListener(v -> {
